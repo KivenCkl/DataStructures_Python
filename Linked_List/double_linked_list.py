@@ -57,7 +57,32 @@ class CircularDoubleLinkedList:
             self.root.next = node
         self.length += 1
 
-    def remove(self, node):
+    def remove(self, value):
+        if len(self) == 0:
+            raise Exception('Can not remove a node from an empty LinkedList')
+        curNode = self.headnode()
+        while curNode is not self.root:
+            if curNode.value == value:
+                self.length -= 1
+                return value
+            curNode = curNode.next
+        return -1
+
+
+    def append_node(self, node):
+        """
+        Parameters
+        ----------
+        node:
+        """
+        tailnode = self.tailnode()
+        tailnode.next = node
+        node.prev = tailnode
+        node.next = self.root
+        self.root.prev = node
+        self.length += 1
+
+    def remove_node(self, node):
         """
         Parameters
         ----------
@@ -110,13 +135,18 @@ def test_double_link_list():
 
     headnode = dll.headnode()
     assert headnode.value == 0
-    dll.remove(headnode)
+    dll.remove_node(headnode)
     assert len(dll) == 2
     assert [node.value for node in dll.iter_node()] == [1, 2]
 
     dll.appendleft(0)
     assert [node.value for node in dll.iter_node()] == [0, 1, 2]
 
+    tailnode = dll.tailnode()
+    assert tailnode.value == 2
+    assert dll.remove(2) == 2
+    dll.append_node(tailnode)
+    assert [node.value for node in dll.iter_node()] == [0, 1, 2]
 
 if __name__ == '__main__':
     test_double_link_list()
