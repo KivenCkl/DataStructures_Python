@@ -131,6 +131,51 @@ def _nth_element(theSeq, first, last, K):
     else:
         return _nth_element(theSeq, first, pivot_index-1, K)
 
+"""
+Linear-Time Sorting
+"""
+
+def counting_sort(theSeq, k):
+    """计数排序, O(n+k)
+    theSeq中每一个都是介于0到k之间的整数
+    """
+    length = len(theSeq)
+    newList = [0 for _ in range(length)]    # 设置输出序列并初始化
+    countList = [0 for _ in range(k+1)]     #设置计数序列并初始化
+    for i in theSeq:    # 计算元素theSeq[i]的个数
+        countList[i] += 1
+    for j in range(1, k+1): # 计算小于theSeq[j]的个数
+        countList[j] = countList[j] + countList[j-1]
+    for ele in reversed(theSeq):    # 倒序扫描从而保证稳定算法
+        newList[countList[ele] - 1] = ele
+        countList[ele] -= 1
+    return newList
+
+def bucket_sort(theSeq):
+    """桶排序, O(n)
+    把数组theSeq划分为n个大小相同子区间（桶），每个子区间各自排序，最后合并，计数排序是桶排序的一种特殊情况，可以把计数排序当成每个桶里只有一个元素的情况
+    """
+    buckets = [0] * ((max(theSeq) - min(theSeq)) + 1)   # 初始化桶元素
+    for i in range(len(theSeq)):
+        buckets[theSeq[i] - min(theSeq)] += 1
+    newList = []
+    for i in range(len(buckets)):
+        if buckets[i] != 0:
+            newList += [i + min(theSeq)] * buckets[i]
+    return newList
+
+def radix_sort(theSeq, k=3):
+    """基数排序
+    基数排序一般用于长度相同的元素组成的数组，首先按照最低有效数字进行排序，然后由低位向高位进行
+    k=3，默认三位数，如果是四位数，则k=4，以此类推
+    """
+    newList = theSeq
+    for i in range(k):
+        buckets = [[] for _ in range(10)] # 每一位数字都是0~9
+        for num in newList:
+            buckets[(num / (10 ** i)) % 10].append(num)
+        newList = [ele for bucket in buckets for ele in bucket]
+    return newList
 
 # test
 def test_sort():
