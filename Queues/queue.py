@@ -21,8 +21,9 @@ class Queue_List:
 
 # 循环队列
 import sys
-sys.path.append('C:/Users/chenkiven/Desktop/Code/data_structures_python')
+sys.path.append('././')
 from Array_List.array_and_list import Array
+
 class Queue_Cir_Array:
     """Queue ADT, use Circular Array
         通过头尾指针实现，使用环数组实现可以使得入队出队操作时间复杂度为O(1)，缺点是数组长度需要固定
