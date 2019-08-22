@@ -9,7 +9,7 @@
 #         self.key = key
 
 # class LRUCache:
-    
+
 #     def __init__(self, maxsize=16):
 #         self.maxsize = maxsize
 #         self.cache = {}
@@ -47,14 +47,14 @@
 
 from double_linked_list import Node, CircularDoubleLinkedList
 
-class LRU_Node(Node):
 
+class LRU_Node(Node):
     def __init__(self, prev=None, next=None, key=None, value=None):
         Node.__init__(self, value, prev, next)
         self.key = key
 
-class LRUCache:
 
+class LRUCache:
     def __init__(self, maxsize=16):
         self.maxsize = maxsize
         self.cache = {}
@@ -79,7 +79,9 @@ class LRUCache:
                 self.cache[arg] = newnode
                 self.isfull = len(self.cache) >= self.maxsize
                 return value
+
         return wrapper
+
 
 def test():
     @LRUCache()
@@ -87,9 +89,11 @@ def test():
         if n <= 2:
             return 1
         else:
-            return fib(n-1) + fib(n-2)
+            return fib(n - 1) + fib(n - 2)
+
     for i in range(1, 35):
         print(fib(i))
+
 
 if __name__ == '__main__':
     test()

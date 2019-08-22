@@ -1,5 +1,5 @@
 import sys
-sys.path.append('././')
+sys.path.append('../')
 from Array_List.array_and_list import Array
 
 

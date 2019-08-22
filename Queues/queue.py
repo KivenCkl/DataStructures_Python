@@ -5,29 +5,32 @@ class Queue_List:
 
     def __init__(self):
         self._qList = list()
-    
+
     def isEmpty(self):
         return len(self) == 9
-    
+
     def __len__(self):
         return len(self._qList)
-    
+
     def enqueue(self, item):
         self._qList.append(item)
-    
+
     def dequeue(self):
         assert not self.isEmpty()
         return self._qList.pop(0)
+
 
 # 循环队列
 import sys
 sys.path.append('././')
 from Array_List.array_and_list import Array
 
+
 class Queue_Cir_Array:
     """Queue ADT, use Circular Array
-        通过头尾指针实现，使用环数组实现可以使得入队出队操作时间复杂度为O(1)，缺点是数组长度需要固定
+        通过头尾指针实现，使用环数组实现可以使得入队出队操作时间复杂度为 O(1)，缺点是数组长度需要固定
     """
+
     def __init__(self, maxSize):
         self._count = 0
         self._head = 0
@@ -46,7 +49,7 @@ class Queue_Cir_Array:
     def enqueue(self, item):
         assert not self.isFull()
         maxSize = len(self._qArray)
-        self._tail = (self._tail + 1) % maxSize     # 移动尾指针
+        self._tail = (self._tail + 1) % maxSize  # 移动尾指针
         self._qArray[self._tail] = item
         self._count += 1
 
@@ -58,16 +61,18 @@ class Queue_Cir_Array:
         self._count -= 1
         return item
 
+
 # 链式队列
 class Queue_Linked_List:
     """Queue ADT, use linked list
-        改进环数组有最大数量的限制，改用带有头尾节点的linked list实现
+        改进环数组有最大数量的限制，改用带有头尾节点的 linked list 实现
     """
+
     def __init__(self):
         self._qhead = None
         self._qtail = None
         self._qsize = 0
-    
+
     def isEmpty(self):
         return self._qhead is None
 
@@ -92,28 +97,32 @@ class Queue_Linked_List:
         self._qsize -= 1
         return node.item
 
+
 class _QueueNode:
     def __init__(self, item):
         self.item = item
         self.next = None
 
+
 """
-PriorityQueue ADT: 给每个item加上优先级p，高优先级先dequeue
+PriorityQueue ADT: 给每个 item 加上优先级 p，高优先级先 dequeue
 分为两种：
-- bounded PriorityQueue: 限制优先级在一个区间[0...p)
+- bounded PriorityQueue: 限制优先级在一个区间 [0...p)
 - unbounded PriorityQueue: 不限制优先级
 
 两种实现方式：
-1. 入队的时候都是到队尾，出队操作找到最高优先级的出队，出队操作O(n)
-2. 始终维持队列有序，每次入队都找到该插入的位置，出队操作是O(1)
+1. 入队的时候都是到队尾，出队操作找到最高优先级的出队，出队操作 O(n)
+2. 始终维持队列有序，每次入队都找到该插入的位置，出队操作是 O(1)
 """
+
+
 class UnboundedPriorityQueue:
     """
     """
     from collections import namedtuple
     _PriorityQEntry = namedtuple('_PriorityQEntry', 'item, priority')
 
-    # 采用方式1
+    # 采用方式 1
     def __init__(self):
         self._qlist = list()
 
@@ -138,11 +147,12 @@ class UnboundedPriorityQueue:
         entry = self._qlist.pop(temp)
         return entry.item
 
+
 class BoundedPriorityQueue:
     """BoundedPriorityQueue ADT, use linked list
-    BoundedPriorityQueue的优先级限制在[0, maxPriority-1]
-    对于UnboundedPriorityQueue，出队操作由于要遍历寻找优先级最高的item，所以平均是O(n)的操作；
-    但是对于BoundedPriorityQueue，用队列数组实现可以达到常量时间，用空间换时间；
+    BoundedPriorityQueue 的优先级限制在 [0, maxPriority-1]
+    对于 UnboundedPriorityQueue，出队操作由于要遍历寻找优先级最高的 item，所以平均是 O(n) 的操作；
+    但是对于 BoundedPriorityQueue，用队列数组实现可以达到常量时间，用空间换时间；
     比如，要弹出一个元素，直接找到第一个非空队列弹出元素即可（小数字代表高优先级，先出队）
 
     qList
@@ -151,14 +161,14 @@ class BoundedPriorityQueue:
     [2] -> ["balck", "green"]
     [3] -> ["purple", "yellow"]
     """
-    from Array_List.array_and_list import Array     # 之前定义的数组
+    from Array_List.array_and_list import Array  # 之前定义的数组
 
     def __init__(self, numLevels):
         self._qSize = 0
         self._qLevels = Array(numLevels)
         for i in range(numLevels):
             self._qLevels[i] = Queue_Linked_List()  # 前面定义的链式队列
-    
+
     def isEmpty(self):
         return len(self) == 0
 
@@ -166,15 +176,16 @@ class BoundedPriorityQueue:
         return self._qSize
 
     def enqueue(self, item, priority):
-        assert priority >= 0 and priority < len(self._qLevels), 'invalid priority'
+        assert priority >= 0 and priority < len(
+            self._qLevels), 'invalid priority'
         self._qSize += 1
         self._qLevels[priority].enqueue(item)
-    
+
     def dequeue(self):
         assert not self.isEmpty(), 'can not dequeue from an empty queue'
         i = 0
         p = len(self._qLevels)
-        while i < p and self._qLevels[i].isEmpty(): # 找到第一个非空队列
+        while i <p and self._qLevels[i].isEmpty():  # 找到第一个非空队列
             i += 1
         self._qSize -= 1
         return self._qLevels[i].dequeue()

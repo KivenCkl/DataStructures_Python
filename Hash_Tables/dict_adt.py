@@ -1,14 +1,12 @@
-import sys
-sys.path.append('./')
-from Hash_Tables.hash_tables import HashMap
+from hash_tables import HashMap
+
 
 class DictADT(HashMap):
-
     def _iter_slot(self):
         for slot in self._table:
             if slot not in (HashMap.EMPTY, HashMap.UNUSED):
                 yield slot
-        
+
     def __setitem__(self, key, value):
         self.add(key, value)
 
@@ -48,6 +46,7 @@ def test_dict_adt():
         assert d.valueOf(i) == i
 
     assert sorted(list(d.keys())) == sorted(l)
+
 
 if __name__ == '__main__':
     test_dict_adt()

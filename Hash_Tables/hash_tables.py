@@ -1,31 +1,29 @@
-
 import sys
-sys.path.append('././')
+sys.path.append('../')
 
 from Array_List.array_and_list import Array
 
 
 class HashMap:
-    """HashMap ADT实现，类似于python内置的dict
+    """HashMap ADT 实现，类似于 python 内置的 dict
     一个槽有三种状态：
-    1.从未使用HashMap.UNUSED。此槽没有被使用和冲突过，查找时只要找到UNUSED就不用再继续探查了
-    2.使用过但是remove了，此时是HashMap.EMPTY，该探查点后边的元素仍可能是有key的
-    3.槽正在使用_MapEntry节点
+    1. 从未使用 HashMap.UNUSED。此槽没有被使用和冲突过，查找时只要找到 UNUSED 就不用再继续探查了
+    2. 使用过但是 remove 了，此时是 HashMap.EMPTY，该探查点后边的元素仍可能是有 key 的
+    3. 槽正在使用_MapEntry 节点
     """
 
-    class _MapEntry:    # 槽里存储的数据
-
+    class _MapEntry:  # 槽里存储的数据
         def __init__(self, key, value):
             self.key = key
             self.value = value
 
-    UNUSED = None   # 没被使用过的槽
-    EMPTY = _MapEntry(None, None)   # 使用过但是被删除的槽
+    UNUSED = None  # 没被使用过的槽
+    EMPTY = _MapEntry(None, None)  # 使用过但是被删除的槽
 
     def __init__(self):
-        self._table = Array(7)  # 初始化7个槽
+        self._table = Array(7)  # 初始化 7 个槽
         self._count = 0
-        # 超过2/3空间被使用就重新分配，load_factor = 2/3
+        # 超过 2/3 空间被使用就重新分配，load_factor = 2/3
         self._maxCount = len(self._table) - len(self._table) // 3
 
     def __len__(self):
@@ -36,7 +34,7 @@ class HashMap:
         return slot is not None
 
     def add(self, key, value):
-        if key in self:  # 覆盖原有value
+        if key in self:  # 覆盖原有 value
             slot = self._findSlot(key, False)
             self._table[slot].value = value
             return False
@@ -44,7 +42,7 @@ class HashMap:
             slot = self._findSlot(key, True)
             self._table[slot] = HashMap._MapEntry(key, value)
             self._count += 1
-            if self._count == self._maxCount:   # 超过2/3使用就rehash
+            if self._count == self._maxCount:  # 超过 2/3 使用就 rehash
                 self._rehash()
             return True
 
@@ -54,9 +52,9 @@ class HashMap:
         return self._table[slot].value
 
     def remove(self, key):
-        """remove操作把槽置为EMPTY
+        """remove 操作把槽置为 EMPTY
         """
-        assert key in self, 'Key error %s' % key
+        assert key in self, 'Key error {0}'.format(key)
         slot = self._findSlot(key, forInsert=False)
         value = self._table[slot].value
         self._count -= 1
@@ -67,23 +65,21 @@ class HashMap:
         return _HashMapIterator(self._table)
 
     def _slot_can_insert(self, slot):
-        return (self._table[slot] is HashMap.EMPTY or
-                self._table[slot] is HashMap.UNUSED)
+        return (self._table[slot] is HashMap.EMPTY
+                or self._table[slot] is HashMap.UNUSED)
 
     def _findSlot(self, key, forInsert=False):
         """
-        Args:
-            forInsert(bool): if the search is for an insertion
-        Returns:
-            slot or None
+        :param forInsert: bool, if the search is for an insertion
+        :return: slot or None
         """
         slot = self._hash1(key)
         step = self._hash2(key)
         _len = len(self._table)
 
-        if not forInsert:   # 查找是否存在key
+        if not forInsert:  # 查找是否存在 key
             while self._table[slot] is not HashMap.UNUSED:
-                # 如果一个槽是UNUSED，直接跳出
+                # 如果一个槽是 UNUSED，直接跳出
                 if self._table[slot] is HashMap.EMPTY:
                     slot = (slot + step) % _len
                     continue
@@ -91,23 +87,23 @@ class HashMap:
                     return slot
                 slot = (slot + step) % _len
             return None
-        else:   # 为了插入key
+        else:  # 为了插入 key
             while not self._slot_can_insert(slot):
                 # 循环直到找到一个可以插入的槽
                 slot = (slot + step) % _len
             return slot
 
     def _rehash(self):
-        """当前使用槽数量大于2/3时，重新创建新的table
+        """ 当前使用槽数量大于 2/3 时，重新创建新的 table
         """
         originTable = self._table
-        newSize = len(self._table) * 2 + 1  # 原来的2*n+1倍
+        newSize = len(self._table) * 2 + 1  # 原来的 2*n+1 倍
         self._table = Array(newSize)
 
         self._count = 0
         self._maxCount = newSize - newSize // 3
 
-        # 将原来的key, value添加到新的table
+        # 将原来的 key, value 添加到新的 table
         for entry in originTable:
             if entry is not HashMap.UNUSED and entry is not HashMap.EMPTY:
                 slot = self._findSlot(entry.key, True)
@@ -115,18 +111,17 @@ class HashMap:
                 self._count += 1
 
     def _hash1(self, key):
-        """计算key的hash值
+        """ 计算 key 的 hash 值
         """
         return abs(hash(key)) % len(self._table)
 
     def _hash2(self, key):
-        """key冲突时用来计算新槽的位置
+        """key 冲突时用来计算新槽的位置
         """
         return 1 + abs(hash(key)) % (len(self._table) - 2)
 
 
 class _HashMapIterator:
-
     def __init__(self, array):
         self._array = array
         self._idx = 0
@@ -135,9 +130,9 @@ class _HashMapIterator:
         return self
 
     def __next__(self):
-        if self._idx < len(self._array):
-            if (self._array[self._idx] is not None and
-                    self._array[self._idx].key is not None):
+        if self._idx <len(self._array):
+            if (self._array[self._idx] is not None
+                    and self._array[self._idx].key is not None):
                 key = self._array[self._idx].key
                 self._idx += 1
                 return key

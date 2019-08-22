@@ -1,14 +1,14 @@
 import ctypes
 
+
 class Array:
     """One-Demensional Arrays
-    Parameters
-    ----------
-    size: int
-        the size of array
     """
 
     def __init__(self, size):
+        """
+        :param size: int, the size of array
+        """
         assert size > 0, 'array size must be > 0'
         self._size = size
         PyArrayType = ctypes.py_object * size
@@ -26,12 +26,13 @@ class Array:
         assert index >= 0 and index < len(self), 'out of range'
         self._elements[index] = value
 
-    def clear(self, value):
+    def clear(self, value=None):
         for i in range(len(self)):
             self._elements[i] = value
-        
+
     def __iter__(self):
         return _ArrayIterator(self._elements)
+
 
 class _ArrayIterator:
     def __init__(self, items):
@@ -52,26 +53,17 @@ class _ArrayIterator:
 
 class Array2D:
     """Two-Demensional Arrays
-    Parameters
-    ----------
-    numrows: int
-        the size of rows
-    numcols: int
-        the size of cols
-    Attributes
-    ----------
-    numRows()
-    numCols()
-    clear(value)
-    getitem(i, j)
-    setitem(i, j, val)
     """
 
     def __init__(self, numrows, numcols):
+        """
+        :param numrows: int, the size of rows
+        :param numcols: int, the size of cols
+        """
         self._the_rows = Array(numrows)
         for i in range(numrows):
             self._the_rows[i] = Array(numcols)
-    
+
     @property
     def numRows(self):
         return len(self._the_rows)
@@ -83,33 +75,27 @@ class Array2D:
     def clear(self, value):
         for row in self._the_rows:
             row.clear(value)
-    
+
     def __getitem__(self, ndx_tuple):
         """
-        Parameters
-        ----------
-        ndx_tuple: tuple, shape = (row, col)
-        Returns
-        -------
-        value
+        :param ndx_tuple: tuple, shape = (row, col)
+        :return value: int or float
         """
         assert len(ndx_tuple) == 2
         row, col = ndx_tuple[0], ndx_tuple[1]
-        assert (row >= 0 and row < self.numRows and
-                col >= 0 and col < self.numCols)
+        assert (row >= 0 and row < self.numRows and col >= 0
+                and col < self.numCols)
         the_1d_array = self._the_rows[row]
         return the_1d_array[col]
-    
+
     def __setitem__(self, ndx_tuple, value):
         """
-        Parameters
-        ----------
-        ndx_tuple: tuple, shape = (row, col)
-        value: int or float
+        :param ndx_tuple: tuple, shape = (row, col)
+        :param value: int or float
         """
         assert len(ndx_tuple) == 2
         row, col = ndx_tuple[0], ndx_tuple[1]
-        assert (row >= 0 and row < self.numRows and
-                col >= 0 and col < self.numCols)
+        assert (row >= 0 and row < self.numRows and col >= 0
+                and col < self.numCols)
         the_1d_array = self._the_rows[row]
         the_1d_array[col] = value

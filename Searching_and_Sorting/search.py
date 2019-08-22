@@ -1,6 +1,5 @@
-
 def binary_search(sorted_seq, val):
-    """实现标准库中的bisect.bisect_left
+    """ 实现标准库中的 bisect.bisect_left
     """
     low = 0
     high = len(sorted_seq) - 1
@@ -8,14 +7,15 @@ def binary_search(sorted_seq, val):
         mid = (high + low) // 2
         if sorted_seq[mid] == val:
             return mid
-        elif val < sorted_seq[mid]:
+        elif val <sorted_seq[mid]:
             high = mid - 1
         else:
             low = mid + 1
-    return -1   # 不存在该值
+    return -1  # 不存在该值
+
 
 def bsearch_First(sorted_seq, val):
-    """二分查找第一个值等于给定值的元素
+    """ 二分查找第一个值等于给定值的元素
     """
     low = 0
     high = len(sorted_seq) - 1
@@ -26,14 +26,15 @@ def bsearch_First(sorted_seq, val):
         elif sorted_seq[mid] < val:
             low = mid + 1
         else:
-            if mid == 0 or sorted_seq[mid-1] != val:
+            if mid == 0 or sorted_seq[mid - 1] != val:
                 return mid
             else:
                 high = mid - 1
     return -1
 
+
 def bsearch_Last(sorted_seq, val):
-    """二分查找最后一个值等于给定值的元素
+    """ 二分查找最后一个值等于给定值的元素
     """
     low = 0
     high = len(sorted_seq) - 1
@@ -44,21 +45,22 @@ def bsearch_Last(sorted_seq, val):
         elif sorted_seq[mid] < val:
             low = mid + 1
         else:
-            if mid == len(sorted_seq)-1 or sorted_seq[mid+1] != val:
+            if mid == len(sorted_seq) - 1 or sorted_seq[mid + 1] != val:
                 return mid
             else:
                 low = mid + 1
     return -1
 
+
 def bsearch_FirstLargerEqual(sorted_seq, val):
-    """二分查找第一个大于等于给定值的元素
+    """ 二分查找第一个大于等于给定值的元素
     """
     low = 0
     high = len(sorted_seq) - 1
     while low <= high:
         mid = low + ((high - low) >> 1)
         if sorted_seq[mid] >= val:
-            if mid == 0 or sorted_seq[mid-1] < val:
+            if mid == 0 or sorted_seq[mid - 1] < val:
                 return mid
             else:
                 high = mid - 1
@@ -66,15 +68,16 @@ def bsearch_FirstLargerEqual(sorted_seq, val):
             low = mid + 1
     return -1
 
+
 def bsearch_LastSmallerEqual(sorted_seq, val):
-    """二分查找最后一个小于等于给定值的元素
+    """ 二分查找最后一个小于等于给定值的元素
     """
     low = 0
     high = len(sorted_seq) - 1
     while low <= high:
         mid = low + ((high - low) >> 1)
         if sorted_seq[mid] <= val:
-            if mid == len(sorted_seq)-1 or sorted_seq[mid+1] > val:
+            if mid == len(sorted_seq) - 1 or sorted_seq[mid + 1] > val:
                 return mid
             else:
                 low = mid + 1
@@ -82,8 +85,9 @@ def bsearch_LastSmallerEqual(sorted_seq, val):
             high = mid - 1
     return -1
 
+
 def bsearch_Circle(seq, val):
-    """二分查找循环有序数组等于给定值的元素
+    """ 二分查找循环有序数组等于给定值的元素
     """
     low = 0
     high = len(seq) - 1
@@ -106,6 +110,7 @@ def bsearch_Circle(seq, val):
                 high = mid - 1
     return -1
 
+
 def test_sort():
     seq = [1, 5, 6, 8, 11, 15]
     assert binary_search(seq, 9) == -1
@@ -117,6 +122,7 @@ def test_sort():
     assert bsearch_LastSmallerEqual(sorted_seq, 18) == 9
     seq = [4, 5, 6, 1, 2, 3]
     assert bsearch_Circle(seq, 1) == 3
+
 
 if __name__ == '__main__':
     test_sort()

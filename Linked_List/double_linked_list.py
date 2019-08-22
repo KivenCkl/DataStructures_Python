@@ -1,18 +1,15 @@
-
 class Node:
-
     def __init__(self, value=None, prev=None, next=None):
         self.value, self.prev, self.next = value, prev, next
 
+
 class CircularDoubleLinkedList:
-    """循环双端链表
+    """ 循环双端链表
     """
 
     def __init__(self, maxsize=None):
         """
-        Parameters
-        ----------
-        maxsize: int or None
+        :param maxsize: int or None
         """
         self.maxsize = maxsize
         node = Node()
@@ -22,7 +19,7 @@ class CircularDoubleLinkedList:
 
     def __len__(self):
         return self.length
-    
+
     def headnode(self):
         return self.root.next
 
@@ -44,7 +41,7 @@ class CircularDoubleLinkedList:
         if self.maxsize is not None and len(self) >= self.maxsize:
             raise Exception('LinkedList is Full')
         node = Node(value=value)
-        if self.root.next is self.root: # 链表为空
+        if self.root.next is self.root:  # 链表为空
             node.next = self.root
             node.prev = self.root
             self.root.next = node
@@ -68,13 +65,7 @@ class CircularDoubleLinkedList:
             curNode = curNode.next
         return -1
 
-
     def append_node(self, node):
-        """
-        Parameters
-        ----------
-        node:
-        """
         tailnode = self.tailnode()
         tailnode.next = node
         node.prev = tailnode
@@ -83,11 +74,6 @@ class CircularDoubleLinkedList:
         self.length += 1
 
     def remove_node(self, node):
-        """
-        Parameters
-        ----------
-        node:
-        """
         if node is self.root:
             return
         else:
@@ -104,13 +90,13 @@ class CircularDoubleLinkedList:
             yield curnode
             curnode = curnode.next
         yield curnode
-    
+
     def __iter__(self):
         for node in self.iter_node():
             yield node.value
-    
+
     def iter_node_reverse(self):
-        """较方便的实现反序遍历
+        """ 较方便的实现反序遍历
         """
         if self.root.prev is self.root:
             return
@@ -147,6 +133,7 @@ def test_double_link_list():
     assert dll.remove(2) == 2
     dll.append_node(tailnode)
     assert [node.value for node in dll.iter_node()] == [0, 1, 2]
+
 
 if __name__ == '__main__':
     test_double_link_list()

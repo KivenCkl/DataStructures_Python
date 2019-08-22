@@ -1,14 +1,13 @@
-
 class Node:
-
     def __init__(self, value=None, next=None):
         self.value = value
         self.next = next
 
     def __str__(self):
         return '<Node: value: {}, next={}>'.format(self.value, self.next)
-    
+
     __repr__ = __str__
+
 
 class LinkedList:
     """Sigle Linked List
@@ -17,9 +16,7 @@ class LinkedList:
 
     def __init__(self, maxsize=None):
         """
-        Parameters
-        ----------
-        maxsize: int or None
+        :param maxsize: int or None
         """
         self.maxsize = maxsize
         self.root = Node()
@@ -28,15 +25,15 @@ class LinkedList:
 
     def __len__(self):
         return self.length
-    
-    def append(self, value):    # O(1)
+
+    def append(self, value):  # O(1)
         if self.maxsize is not None and len(self) >= self.maxsize:
             raise Exception('LinkedList is Full')
         node = Node(value)
         tailnode = self.tailnode
-        if tailnode is None:    # length = 0, 追加在root后面
+        if tailnode is None:  # length = 0, 追加在 root 后面
             self.root.next = node
-        else:                   # 否则追加在最后一个节点的后面，并更新尾节点
+        else:  # 否则追加在最后一个节点的后面，并更新尾节点
             tailnode.next = node
         self.tailnode = node
         self.length += 1
@@ -45,7 +42,7 @@ class LinkedList:
         if self.maxsize is not None and len(self) >= self.maxsize:
             raise Exception('LinkedList is Full')
         node = Node(value)
-        if self.tailnode is None:   # 原链表为空，插入第一个元素
+        if self.tailnode is None:  # 原链表为空，插入第一个元素
             self.tailnode = node
         headnode = self.root.next
         self.root.next = node
@@ -55,7 +52,7 @@ class LinkedList:
     def __iter__(self):
         for node in self.iter_node():
             yield node.value
-    
+
     def iter_node(self):
         """Traverse from headnode to tailnode
         """
@@ -63,18 +60,17 @@ class LinkedList:
         while curnode is not self.tailnode:
             yield curnode
             curnode = curnode.next
-        if curnode is not None: # 判断是否为空链表进行尾节点的输出
+        if curnode is not None:  # 判断是否为空链表进行尾节点的输出
             yield curnode
 
-    def remove(self, value):    # O(n)
+    def remove(self, value):  # O(n)
         """Del one node with value
-        Parameters
-        ----------
-        value:
-        Returns
-        -------
-        1: success to del
-        -1: fail to del
+
+        :param value: value in node
+
+        :return:
+            1: success to del
+            -1: fail to del
         """
         prevnode = self.root
         for curnode in self.iter_node():
@@ -84,20 +80,18 @@ class LinkedList:
                     self.tailnode = prevnode
                 del curnode
                 self.length -= 1
-                return 1    # 表明删除成功
+                return 1  # 表明删除成功
             else:
                 prevnode = curnode
-        return -1   # 表明删除失败
+        return -1  # 表明删除失败
 
     def find(self, value):  # O(n)
         """Find a node with value
-        Parameters
-        ----------
-        value:
-        Returns
-        -------
-        index of the node with value(index started with 0)
-        or -1, which means fail
+
+        :param value:
+
+        :return: index of the node with value(index started with 0)
+                 or -1, which means fail
         """
         index = 0
         for node in self.iter_node():
@@ -108,9 +102,8 @@ class LinkedList:
 
     def popleft(self):  # O(1)
         """Del the first node
-        Returns
-        -------
-        value: value of the first node
+
+        :return value: value of the first node
         """
         if self.root.next is None:
             raise Exception('pop from empty LinkedList')

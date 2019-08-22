@@ -1,4 +1,3 @@
-
 class Stack_1:
     """Stack ADT, using a python list
     """
@@ -11,7 +10,7 @@ class Stack_1:
 
     def __len__(self):
         return len(self._items)
-    
+
     def peek(self):
         assert not self.isEmpty()
         return self._items[-1]
@@ -77,6 +76,7 @@ def test_stack():
     assert s2.pop() == 4
     assert s2.pop() == 2
     assert s2.isEmpty() == True
+
 
 if __name__ == '__main__':
     test_stack()
