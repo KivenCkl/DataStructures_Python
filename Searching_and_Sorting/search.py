@@ -1,5 +1,6 @@
 def binary_search(sorted_seq, val):
-    """ 实现标准库中的 bisect.bisect_left
+    """
+    实现标准库中的 bisect.bisect_left
     """
     low = 0
     high = len(sorted_seq) - 1
@@ -15,7 +16,8 @@ def binary_search(sorted_seq, val):
 
 
 def bsearch_First(sorted_seq, val):
-    """ 二分查找第一个值等于给定值的元素
+    """
+    二分查找第一个值等于给定值的元素
     """
     low = 0
     high = len(sorted_seq) - 1
@@ -34,7 +36,8 @@ def bsearch_First(sorted_seq, val):
 
 
 def bsearch_Last(sorted_seq, val):
-    """ 二分查找最后一个值等于给定值的元素
+    """
+    二分查找最后一个值等于给定值的元素
     """
     low = 0
     high = len(sorted_seq) - 1
@@ -53,7 +56,8 @@ def bsearch_Last(sorted_seq, val):
 
 
 def bsearch_FirstLargerEqual(sorted_seq, val):
-    """ 二分查找第一个大于等于给定值的元素
+    """
+    二分查找第一个大于等于给定值的元素
     """
     low = 0
     high = len(sorted_seq) - 1
@@ -70,7 +74,8 @@ def bsearch_FirstLargerEqual(sorted_seq, val):
 
 
 def bsearch_LastSmallerEqual(sorted_seq, val):
-    """ 二分查找最后一个小于等于给定值的元素
+    """
+    二分查找最后一个小于等于给定值的元素
     """
     low = 0
     high = len(sorted_seq) - 1
@@ -87,7 +92,8 @@ def bsearch_LastSmallerEqual(sorted_seq, val):
 
 
 def bsearch_Circle(seq, val):
-    """ 二分查找循环有序数组等于给定值的元素
+    """
+    二分查找循环有序数组等于给定值的元素
     """
     low = 0
     high = len(seq) - 1

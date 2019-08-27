@@ -1,5 +1,6 @@
 def bubble_sort(seq):  # O(n^2)
-    """ 冒泡排序
+    """
+    冒泡排序
     """
     n = len(seq)
     if n <= 1:
@@ -16,7 +17,8 @@ def bubble_sort(seq):  # O(n^2)
 
 
 def select_sort(seq):
-    """ 选择排序
+    """
+    选择排序
     可以看作是冒泡的改进，每次找一个最小的元素交换，每一轮只需要交换一次
     """
     n = len(seq)
@@ -32,7 +34,8 @@ def select_sort(seq):
 
 
 def insertion_sort(seq):
-    """ 插入排序
+    """
+    插入排序
     每次挑选下一个元素插入已经排序的数组中，初始时已排序数组只有一个元素
     """
     n = len(seq)
@@ -52,7 +55,8 @@ Advanced Sorting
 
 
 def merge_sorted_list(listA, listB):
-    """ 归并两个有序数组，O(max(len(listA), len(listB)))
+    """
+    归并两个有序数组，O(max(len(listA), len(listB)))
     """
     new_list = list()
     a = b = 0
@@ -73,7 +77,8 @@ def merge_sorted_list(listA, listB):
 
 
 def mergesort(theList):
-    """ 归并排序，时间复杂度：O(nlogn)， 空间复杂度：O(n)
+    """
+    归并排序，时间复杂度：O(nlogn)， 空间复杂度：O(n)
     mergesort: divided and conquer 分治算法
     1. 把原数组分解成越来越小的子数组
     2. 合并子数组来创建一个有序数组
@@ -91,7 +96,8 @@ def mergesort(theList):
 
 
 def quicksort(theSeq):
-    """ 快速排序，average: O(nlogn)，原地算法
+    """
+    快速排序，average: O(nlogn)，原地算法
     quicksort: 也是分治，但是和归并排序不同的是，采用选定主元 (pivot) 而不是从中间进行数组划分
     1. 第一步选定 pivot 用来划分数组，pivot 左边元素都比它小，右边元素都大于等于它
     2. 对划分的左右两边数组递归，直到递归出口（数组元素数目小于 2）
@@ -110,7 +116,8 @@ def _quicksort(theSeq, first, last):
 
 
 def partitionSeq(theSeq, first, last):
-    """ 快排中的划分操作
+    """
+    快排中的划分操作
     把比 pivot 小的挪到左边，比 pivot 大的挪到右边
     """
     pivot = theSeq[last]
@@ -124,7 +131,8 @@ def partitionSeq(theSeq, first, last):
 
 
 def nth_element(theSeq, K):
-    """ 快速查找一个无序数组中的第 K 大元素
+    """
+    快速查找一个无序数组中的第 K 大元素
     """
     return _nth_element(theSeq, 0, len(theSeq) - 1, K)
 
@@ -147,7 +155,8 @@ Linear-Time Sorting
 
 
 def counting_sort(theSeq, k):
-    """ 计数排序, O(n+k)
+    """
+    计数排序, O(n+k)
     theSeq 中每一个都是介于 0 到 k 之间的整数
     """
     length = len(theSeq)
@@ -164,7 +173,8 @@ def counting_sort(theSeq, k):
 
 
 def bucket_sort(theSeq):
-    """ 桶排序, O(n)
+    """
+    桶排序, O(n)
     把数组 theSeq 划分为 n 个大小相同子区间（桶），每个子区间各自排序，最后合并，计数排序是桶排序的一种特殊情况，可以把计数排序当成每个桶里只有一个元素的情况
     """
     buckets = [0] * ((max(theSeq) - min(theSeq)) + 1)  # 初始化桶元素
@@ -178,7 +188,8 @@ def bucket_sort(theSeq):
 
 
 def radix_sort(theSeq, k=3):
-    """ 基数排序
+    """
+    基数排序
     基数排序一般用于长度相同的元素组成的数组，首先按照最低有效数字进行排序，然后由低位向高位进行
     k=3，默认三位数，如果是四位数，则 k=4，以此类推
     """

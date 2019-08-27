@@ -1,6 +1,7 @@
 # 顺序队列
 class Queue_List:
-    """Queue ADT, use list
+    """
+    Queue ADT, use list
     """
 
     def __init__(self):
@@ -27,8 +28,9 @@ from Array_List.array_and_list import Array
 
 
 class Queue_Cir_Array:
-    """Queue ADT, use Circular Array
-        通过头尾指针实现，使用环数组实现可以使得入队出队操作时间复杂度为 O(1)，缺点是数组长度需要固定
+    """
+    Queue ADT, use Circular Array
+    通过头尾指针实现，使用环数组实现可以使得入队出队操作时间复杂度为 O(1)，缺点是数组长度需要固定
     """
 
     def __init__(self, maxSize):
@@ -64,8 +66,9 @@ class Queue_Cir_Array:
 
 # 链式队列
 class Queue_Linked_List:
-    """Queue ADT, use linked list
-        改进环数组有最大数量的限制，改用带有头尾节点的 linked list 实现
+    """
+    Queue ADT, use linked list
+    改进环数组有最大数量的限制，改用带有头尾节点的 linked list 实现
     """
 
     def __init__(self):
@@ -149,7 +152,8 @@ class UnboundedPriorityQueue:
 
 
 class BoundedPriorityQueue:
-    """BoundedPriorityQueue ADT, use linked list
+    """
+    BoundedPriorityQueue ADT, use linked list
     BoundedPriorityQueue 的优先级限制在 [0, maxPriority-1]
     对于 UnboundedPriorityQueue，出队操作由于要遍历寻找优先级最高的 item，所以平均是 O(n) 的操作；
     但是对于 BoundedPriorityQueue，用队列数组实现可以达到常量时间，用空间换时间；

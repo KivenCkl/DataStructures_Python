@@ -1,5 +1,6 @@
 class Stack_1:
-    """Stack ADT, using a python list
+    """
+    Stack ADT, using a python list
     """
 
     def __init__(self):
@@ -24,7 +25,8 @@ class Stack_1:
 
 
 class Stack_2:
-    """Stack ADT, using linked list
+    """
+    Stack ADT, using linked list
     """
 
     def __init__(self):

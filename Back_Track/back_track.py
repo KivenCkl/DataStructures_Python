@@ -13,7 +13,8 @@
 
 
 def is_valid(arr: list) -> bool:
-    """ 用于判断最后一行是否和前面冲突
+    """
+    用于判断最后一行是否和前面冲突
     """
     last_ind = len(arr) - 1
     last_col = arr[-1]
@@ -24,8 +25,10 @@ def is_valid(arr: list) -> bool:
 
 
 def back_track_1(i: int, matrix: list, n: int) -> bool:
-    """ 第 1 类问题
-    一行一行的放 queen，每行尝试 n 个可能，有一个可达，返回 True；都不可达，返回 False
+    """
+    第 1 类问题
+    一行一行的放 queen，每行尝试 n 个可能，有一个可达，返回 True
+    都不可达，返回 False
     """
     if i == n:
         if is_valid(matrix):
@@ -45,7 +48,8 @@ count = 0  # 全局变量
 
 
 def back_track_2(i: int, matrix: list, n: int) -> None:
-    """ 第 2.1 类问题
+    """
+    第 2.1 类问题
     一行一行的放 queen，每行尝试 n 个可能，因为需要找所有，因此不需要返回值
     在搜索时，如果有一个可达，仍要继续尝试，当每个子选项都试完了，返回
     """
@@ -66,7 +70,8 @@ result = []  # 全局变量
 
 
 def back_track_3(i: int, matrix: list, n: int) -> None:
-    """ 第 2.2 类问题
+    """
+    第 2.2 类问题
     一行一行的放 queen，每行尝试 n 个可能，因为需要找所有，因此不需要返回值
     在搜索时，如果有一个可达，仍要继续尝试，当每个子选项都试完了，返回
     """

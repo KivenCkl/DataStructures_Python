@@ -4,7 +4,8 @@ class Node:
 
 
 class CircularDoubleLinkedList:
-    """ 循环双端链表
+    """
+    循环双端链表
     """
 
     def __init__(self, maxsize=None):
@@ -96,7 +97,8 @@ class CircularDoubleLinkedList:
             yield node.value
 
     def iter_node_reverse(self):
-        """ 较方便的实现反序遍历
+        """
+        较方便的实现反序遍历
         """
         if self.root.prev is self.root:
             return

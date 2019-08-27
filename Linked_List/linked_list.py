@@ -10,7 +10,8 @@ class Node:
 
 
 class LinkedList:
-    """Sigle Linked List
+    """
+    Sigle Linked List
     [root] -> [node] -> [node1] -> [node2]
     """
 
@@ -54,7 +55,8 @@ class LinkedList:
             yield node.value
 
     def iter_node(self):
-        """Traverse from headnode to tailnode
+        """
+        Traverse from headnode to tailnode
         """
         curnode = self.root.next
         while curnode is not self.tailnode:
@@ -64,10 +66,9 @@ class LinkedList:
             yield curnode
 
     def remove(self, value):  # O(n)
-        """Del one node with value
-
+        """
+        Del one node with value
         :param value: value in node
-
         :return:
             1: success to del
             -1: fail to del
@@ -86,10 +87,9 @@ class LinkedList:
         return -1  # 表明删除失败
 
     def find(self, value):  # O(n)
-        """Find a node with value
-
+        """
+        Find a node with value
         :param value:
-
         :return: index of the node with value(index started with 0)
                  or -1, which means fail
         """
@@ -101,8 +101,8 @@ class LinkedList:
         return -1
 
     def popleft(self):  # O(1)
-        """Del the first node
-
+        """
+        Del the first node
         :return value: value of the first node
         """
         if self.root.next is None:

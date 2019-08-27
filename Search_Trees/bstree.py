@@ -20,12 +20,13 @@ class _BSTMapNode:
 
 
 class BSTMap:
-    '''BST, 树节点包含 key 可 payload. 用 BST 来实现之前用 hash 实现过的 Map ADT.
+    """
+    BST, 树节点包含 key 可 payload. 用 BST 来实现之前用 hash 实现过的 Map ADT.
     性质：对每个内部节点 V,
     1. 对于节点 V, 所有 key 小于 V.key 的存储在 V 的左子树。
     2. 所有 key 大于 V.key 的存储在 V 的右子树
     对 BST 进行中序遍历会得到升序的 key 序列
-    '''
+    """
 
     def __init__(self):
         self._root = None
@@ -56,8 +57,9 @@ class BSTMap:
         return subtree  # 返回引用
 
     def _bstMin(self, subtree):
-        '''顺着树一直往左下角递归找就是最小的，向右下角递归就是最大的
-        '''
+        """
+        顺着树一直往左下角递归找就是最小的，向右下角递归就是最大的
+        """
         if subtree is None:
             return None
         elif subtree.left is None:
@@ -66,8 +68,9 @@ class BSTMap:
             return subtree._bstMin(self, subtree.left)
 
     def add(self, key, value):
-        '''添加或者替代一个 key 的 value, O(N)
-        '''
+        """
+        添加或者替代一个 key 的 value, O(N)
+        """
         node = self._bstSearch(self._root, key)
         if node is not None:  # if key already exists, update value
             node.value = value
@@ -78,8 +81,9 @@ class BSTMap:
             return True
 
     def _bstInsert(self, subtree, key, value):
-        '''新的节点总是插入在树的叶子节点上
-        '''
+        """
+        新的节点总是插入在树的叶子节点上
+        """
         if subtree is None:
             subtree = _BSTMapNode(key, value)
         elif key < subtree.key:
@@ -89,7 +93,8 @@ class BSTMap:
         return subtree
 
     def remove(self, key):
-        '''O(N)
+        """
+        O(N)
         被删除的节点分为三种：
         1. 叶子节点：直接把其父亲指向该节点的指针置 None
         2. 该节点有一个 child：删除该节点后，父亲指向一个合适的该节点的孩子
@@ -97,7 +102,7 @@ class BSTMap:
             (1) 找到要删除节点 N 和其后继 S (中序遍历后该节点下一个)
             (2) 复制 S 的 ke y 和 N
             (3) 从 N 的右子树中删除后继 S (即在 N 的右子树中最小的)
-        '''
+        """
         assert key in self, 'invalid map key'
         self._root = self._bstRemove(self._root, key)
         self._size -= 1
@@ -132,7 +137,9 @@ class BSTMap:
         return '->'.join([str(i) for i in self])
 
     def assert_keep_bst_property(self, subtree):
-        """写这个函数为了验证 add 和 delete 操作始终维持了 bst 的性质"""
+        """
+        写这个函数为了验证 add 和 delete 操作始终维持了 bst 的性质
+        """
         if subtree is None:
             return
         if subtree.left is not None and subtree.right is not None:
@@ -184,7 +191,9 @@ def test_BSTMap():
 
 
 def test_HashMap():
-    """之前用来测试用 hash 实现的 map，改为用 BST 实现的 Map 测试"""
+    """
+    之前用来测试用 hash 实现的 map，改为用 BST 实现的 Map 测试
+    """
     # h = HashMap()
     h = BSTMap()
     assert len(h) == 0

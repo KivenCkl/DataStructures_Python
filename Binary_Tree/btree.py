@@ -14,7 +14,8 @@ class BinTree:
 
     @classmethod
     def built_from(cls, node_list):
-        """build_from
+        """
+        build_from
 
         :param node_list: list[dict],
             ele: {'data': 'A', 'left': None, 'right': None, 'is_root': False}
@@ -34,7 +35,8 @@ class BinTree:
 
     # 三种 depth-first 遍历
     def preOrderTrav(self, subtree):
-        """ 先（根）序遍历
+        """
+        先（根）序遍历
 
         前序遍历是指，对于树中的任意节点来说，先打印这个节点，然后再打印它的左子树，最后打印它的右子树
         """
@@ -44,7 +46,8 @@ class BinTree:
             self.preOrderTrav(subtree.right)
 
     def inOrderTrav(self, subtree):
-        """ 中（根）序遍历
+        """
+        中（根）序遍历
 
         中序遍历是指，对于树中的任意节点来说，先打印它的左子树，然后再打印它本身，最后打印它的右子树
         """
@@ -54,7 +57,8 @@ class BinTree:
             self.inOrderTrav(subtree.right)
 
     def postOrderTrav(self, subtree):
-        """ 后（根）序遍历
+        """
+        后（根）序遍历
 
         后序遍历是指，对于树中的任意节点来说，先打印它的左子树，然后再打印它的右子树，最后打印这个节点本身
         """

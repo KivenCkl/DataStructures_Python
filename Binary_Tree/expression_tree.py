@@ -16,7 +16,8 @@ class _ExpTreeNode:
 
 
 class ExpressionTree:
-    """ 表达式数
+    """
+    表达式树
 
     操作符存储在内节点操作数存储在叶子节点的二叉树
             *
@@ -49,7 +50,8 @@ class ExpressionTree:
         return self._buildString(self._exp_tree)
 
     def _buildString(self, tree_node):
-        """ 在一个子树被遍历之前添加左括号，在子树被遍历之后添加右括号
+        """
+        在一个子树被遍历之前添加左括号，在子树被遍历之后添加右括号
         """
         if tree_node.left is None and tree_node.right is None:
             # 叶子节点是操作数直接返回

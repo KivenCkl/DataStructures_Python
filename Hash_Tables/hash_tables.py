@@ -5,7 +5,8 @@ from Array_List.array_and_list import Array
 
 
 class HashMap:
-    """HashMap ADT 实现，类似于 python 内置的 dict
+    """
+    HashMap ADT 实现，类似于 python 内置的 dict
     一个槽有三种状态：
     1. 从未使用 HashMap.UNUSED。此槽没有被使用和冲突过，查找时只要找到 UNUSED 就不用再继续探查了
     2. 使用过但是 remove 了，此时是 HashMap.EMPTY，该探查点后边的元素仍可能是有 key 的
@@ -94,7 +95,8 @@ class HashMap:
             return slot
 
     def _rehash(self):
-        """ 当前使用槽数量大于 2/3 时，重新创建新的 table
+        """
+        当前使用槽数量大于 2/3 时，重新创建新的 table
         """
         originTable = self._table
         newSize = len(self._table) * 2 + 1  # 原来的 2*n+1 倍
@@ -111,12 +113,14 @@ class HashMap:
                 self._count += 1
 
     def _hash1(self, key):
-        """ 计算 key 的 hash 值
+        """
+        计算 key 的 hash 值
         """
         return abs(hash(key)) % len(self._table)
 
     def _hash2(self, key):
-        """key 冲突时用来计算新槽的位置
+        """
+        key 冲突时用来计算新槽的位置
         """
         return 1 + abs(hash(key)) % (len(self._table) - 2)
 

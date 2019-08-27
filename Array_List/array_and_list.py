@@ -2,7 +2,8 @@ import ctypes
 
 
 class Array:
-    """One-Demensional Arrays
+    """
+    One-Demensional Arrays
     """
 
     def __init__(self, size):
@@ -52,7 +53,8 @@ class _ArrayIterator:
 
 
 class Array2D:
-    """Two-Demensional Arrays
+    """
+    Two-Demensional Arrays
     """
 
     def __init__(self, numrows, numcols):

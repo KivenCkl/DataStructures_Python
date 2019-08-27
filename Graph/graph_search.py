@@ -22,8 +22,8 @@ graph = {'A': set(['B', 'C']),
 
 
 def dfs_iter(graph, start):
-    """ 迭代版本 DFS
-    仅返回其中一条路径
+    """
+    迭代版本 DFS，仅返回其中一条路径
     """
     visited, stack = [], [start]
     while stack:
@@ -35,8 +35,8 @@ def dfs_iter(graph, start):
 
 
 def dfs_recur(graph, start, visited=None):
-    """ 递归版本 DFS
-    仅返回其中一条路径
+    """
+    递归版本 DFS，仅返回其中一条路径
     """
     if visited is None:
         visited = []
@@ -48,7 +48,8 @@ def dfs_recur(graph, start, visited=None):
 
 
 def dfs_paths_iter(graph, start, end):
-    """ 迭代 DFS 从出发点到终点的所有路径
+    """
+    迭代 DFS 从出发点到终点的所有路径
     """
     stack = [(start, [start])]
     while stack:
@@ -61,7 +62,8 @@ def dfs_paths_iter(graph, start, end):
 
 
 def dfs_paths_recur(graph, start, end, path=None):
-    """ 递归 DFS 从出发点到终点的所有路径
+    """
+    递归 DFS 从出发点到终点的所有路径
     """
     if path is None:
         path = [start]
@@ -72,8 +74,8 @@ def dfs_paths_recur(graph, start, end, path=None):
 
 
 def bfs_iter(graph, start):
-    """ 迭代版本 BFS
-    仅返回其中一条路径
+    """
+    迭代版本 BFS，仅返回其中一条路径
     """
     visited, queue = [], [start]
     while queue:
@@ -85,8 +87,8 @@ def bfs_iter(graph, start):
 
 
 def bfs_paths_iter(graph, start, end):
-    """ 迭代 BFS 从出发点到终点的所有路径
-    第一个一定是最短的
+    """
+    迭代 BFS 从出发点到终点的所有路径，第一个一定是最短的
     """
     queue = [(start, [start])]
     while queue:
