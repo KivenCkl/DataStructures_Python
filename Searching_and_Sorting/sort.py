@@ -49,6 +49,25 @@ def insertion_sort(seq):
         seq[pos] = value
 
 
+def shell_sort(seq):
+    """
+    希尔排序
+    """
+    n = len(seq)
+    gap = n // 2
+
+    while gap > 0:
+        for j in range(gap, n):
+            i = j
+            while i >= gap:
+                if seq[i] < seq[i - gap]:
+                    seq[i], seq[i - gap] = seq[i - gap], seq[i]
+                    i -= gap
+                else:
+                    break
+        gap //= 2
+
+
 """
 Advanced Sorting
 """
